@@ -1,6 +1,8 @@
 import { useSelector } from "react-redux";
 import { selectAllPosts } from "./postsSlice";
+import { sub } from "date-fns";
 import PostAuthor from "./PostAuthor";
+import TimeAgo from "./TimeAgo";
 
 const PostsList = () => {
     const posts = useSelector(selectAllPosts)
@@ -8,19 +10,20 @@ const PostsList = () => {
     const renderedPosts = posts.map(post => (
         <article key={post.id}>
             <h3>{post.title}</h3>
-            <p>{post.content.substring(0,100)}</p>
+            <p>{post.content.substring(0, 100)}</p>
             <p className="postCredit">
                 <PostAuthor userId={post.userId} />
+                <TimeAgo timestamp={post.date} /> 
             </p>
         </article>
     ))
 
-  return (
-    <div>
-        <h2>Posts</h2>       
-        {renderedPosts}
-    </div>
-  )
+    return (
+        <div>
+            <h2>Posts</h2>
+            {renderedPosts}
+        </div>
+    )
 }
 
 export default PostsList
