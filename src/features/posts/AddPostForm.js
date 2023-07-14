@@ -13,6 +13,8 @@ const AddPostForm = () => {
 
     const users = useSelector(selectAllUsers)
 
+    const canSave = Boolean(title) && Boolean(content) && Boolean(userId)
+
     const onSavePostClicked = () => {
         if (title && content) {
             dispatch(
@@ -54,6 +56,7 @@ const AddPostForm = () => {
                 <button
                     type="button"
                     onClick={onSavePostClicked}
+                    disabled = {!canSave}
                 >Save Post</button>
             </form>
         </section>
